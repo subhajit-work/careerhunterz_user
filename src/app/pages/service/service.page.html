@@ -1,0 +1,50 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScrollHedearFix($event)">
+  <!-- common header show -->
+  <common-header [ngClass]="{'fix-header':isFixedHeader}"></common-header>
+  
+  <!-- Sub header start -->
+	<div class="sub-header">
+		<div class="sub-header-inner">
+		  <h1>Core Services </h1>
+		  <div class="breadcrumbs"><a class="breadcrumbs_item" href="#">Home</a><span class="breadcrumbs_delimiter">|</span><span class="breadcrumbs_item current">Core Services</span></div>
+		</div>
+	</div>
+	<!-- Sub header end -->
+
+  <!--------- details section start ------- -->
+  <div class="detailsPage-wrapper">
+    <div class="service-section">
+      <div class="container">
+        <div class="section-tittle-box">
+          <div class="section-tittle">
+            <h5>{{serviceData?.title?.title}}</h5>
+          </div>
+          <div class="section-main-title">
+            <h1 [innerHTML]="serviceData?.title?.sub_title | safeHtml"></h1>
+          </div>
+          <p [innerHTML]="serviceData?.title?.description | safeHtml"></p>
+        </div>
+        <div class="service-item" *ngFor="let item of serviceData?.data; let i = index; let lastInd = last; let oddItem=odd; let evenItem=even;">
+          <div class="row align-items-center" [ngClass]="{'row-reverse': oddItem}">
+            <div class="col-lg-6">
+              <div class="service-img">
+                <img src="{{file_url}}/{{item?.Path}}/{{item?.image}}">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="service-content">
+                <h3>{{item?.title}}</h3>
+                <p [innerHTML]="item?.description | safeHtml"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- details section end -->
+
+  <!-- common footer show -->
+  <common-footer></common-footer>
+
+</ion-content>

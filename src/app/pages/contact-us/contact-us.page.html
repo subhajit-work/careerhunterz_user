@@ -1,0 +1,339 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScrollHedearFix($event)">
+	<!-- common header show -->
+	<common-header [ngClass]="{'fix-header':isFixedHeader}"></common-header>
+
+	<!-- Sub header start -->
+	<div class="sub-header">
+		<div class="sub-header-inner">
+		  <h1>Query</h1>
+		  <div class="breadcrumbs"><a class="breadcrumbs_item" href="#">Home</a><span class="breadcrumbs_delimiter">|</span><span class="breadcrumbs_item current">Query</span></div>
+		</div>
+	</div>
+	<!-- Sub header end -->
+
+	<!-- get quote start -->
+	<div class="get-quote">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-9">
+					<div class="section-tittle">
+						<h5>{{footer?.query_title[0]?.title}}</h5>
+					</div>
+					<div class="section-main-title">
+						<h1 [innerHTML]="footer?.query_title[0]?.sub_title | safeHtml"></h1>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="custom-btn">
+						<a href="javascript:void(0);">
+						  Get A Quote
+						  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- get quote end -->
+
+	<!-- contact us page start -->
+	<div class="associate-us-wrapper student-register-wrapper contact-us-wrapper" >
+		<div class="container">
+			<div class="row align-items-center">
+				<!-- Contact Info -->
+				<div class="col-xs-12 col-sm-6 col-lg-5">
+					<div class="detailspage-right-item contact-info">
+						<div class="section-tittle-box">
+							<div class="section-tittle">
+							  <h5>{{footer?.query_title[1]?.title}}</h5>
+							</div>
+							<div class="section-main-title">
+							  <h1 [innerHTML]="footer?.query_title[1]?.sub_title | safeHtml"></h1>
+							</div>
+						</div>
+
+						<h3>Stay Connected</h3>
+						<div class="job-list-inner">
+							<span class="social-sites" *ngIf="footer?.social?.facebook">
+								<a target="blank" href="{{footer?.social?.facebook}}">
+									<i class="fa fa-facebook" aria-hidden="true"></i>
+								</a>
+							</span>
+							<span class="social-sites" *ngIf="footer?.social?.twitter">
+								<a target="blank" href="{{footer?.social?.twitter}}">
+									<i class="fa fa-twitter" aria-hidden="true"></i>
+								</a>
+							</span>
+							<span class="social-sites" *ngIf="footer?.social?.Linkedin">
+								<a target="blank" href="{{footer?.social?.Linkedin}}">
+									<i class="fa fa-linkedin" aria-hidden="true"></i>
+								</a>
+							</span>
+							<span class="social-sites" *ngIf="footer?.social?.youtube">
+								<a target="blank" href="{{footer?.social?.youtube}}">
+									<i class="fa fa-youtube" aria-hidden="true"></i>
+								</a>
+							</span>
+							<span class="social-sites" *ngIf="footer?.social?.instagram">
+								<a target="blank" href="{{footer?.social?.instagram}}">
+									<i class="fa fa-instagram" aria-hidden="true"></i>
+								</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-lg-7" [ngClass]="{'disabled': form_submit_text == 'Submitting'}">
+					<form  #acontactusAddForm="ngForm" (ngSubmit)="onSubmit(acontactusAddForm)" class="student-register-inner">
+						
+						<div class="row ion-padding">
+							<div class="col-xs-12 col-sm-10 col-lg-12">
+								<div class="assessment-inner">
+									<div class="row">
+										<!-- name -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Name : <sup>*</sup> </ion-label>
+												<ion-input placeholder="Name*" name="name" [(ngModel)]="model.name" clearInput required></ion-input>
+											</div>
+										</div>
+										<!-- email -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Email : <sup>*</sup> </ion-label>
+												<ion-input placeholder="Email*" type="email" name="email" [(ngModel)]="model.email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" clearInput email required></ion-input>
+											</div>
+										</div>
+										<!-- Mobile -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Mobile <sup>*</sup> </ion-label>
+												<ion-input placeholder="Mobile*" OnlyNumber="true" type="tel" minlength="10"maxlength="10" name="phone_no" [(ngModel)]="model.phone" clearInput required></ion-input>
+											</div>
+										</div>
+										<!-- Job Title -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Job Title : <sup>*</sup> </ion-label>
+												<ion-input placeholder="Job Title*" name="job" [(ngModel)]="model.job" clearInput required></ion-input>
+											</div>
+										</div>
+										<!-- Select Country -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Select Country : <sup>*</sup> </ion-label>
+												<ng-select #countrySearch
+													[dropdownPosition]="'bottom'"
+													placeholder="Select Country*"
+													[items]="country"
+													bindLabel="name"
+													bindValue="id"
+													[searchable]="false"
+													name="country" 
+													[(ngModel)]="model.country"
+													required
+													>
+													<ng-template ng-header-tmp>
+														<input placeholder="Search" class="dropdown-custom-search" type="text" (input)="countrySearch.filter($event.target.value)" [autofocus]="true" />
+													</ng-template>
+												</ng-select>
+											</div>
+										</div>
+										<!-- Select State -->
+										<!-- <div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Select State : <sup>*</sup> </ion-label>
+												<ng-select #visaSearch
+													[dropdownPosition]="'bottom'"
+													placeholder="Select State*"
+													[items]="visa"
+													bindLabel="service_name"
+													bindValue="id"
+													[searchable]="false"
+													name="state" 
+													[(ngModel)]="model.state"
+													required
+													>
+													<ng-template ng-header-tmp>
+														<input placeholder="Search" class="dropdown-custom-search" type="text" (input)="visaSearch.filter($event.target.value)" [autofocus]="true" />
+													</ng-template>
+												</ng-select>
+											</div>
+										</div> -->
+										
+										<!-- Company -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Company : <sup>*</sup> </ion-label>
+												<ion-input placeholder="Company*" name="company" [(ngModel)]="model.company" clearInput required></ion-input>
+											</div>
+										</div>
+										<!-- Select Service -->
+										<div class="col-xs-12 col-sm-6">
+											<div>
+												<ion-label position="floating">Select Service : <sup>*</sup> </ion-label>
+											  <ng-select #visaSearch
+												[dropdownPosition]="'bottom'"
+												placeholder="Select Service*"
+												[items]="coreService"
+												bindLabel="title"
+												bindValue="title"
+												[searchable]="false"
+												name="service_type" 
+												[(ngModel)]="model.service_type"
+												required
+												>
+												<ng-template ng-header-tmp>
+													<input placeholder="Search" class="dropdown-custom-search" type="text" (input)="visaSearch.filter($event.target.value)" [autofocus]="true" />
+												</ng-template>
+											  </ng-select>
+											</div>
+										</div>
+										<!-- Message -->
+										<div class="col-xs-12 col-sm-12">
+											<div>
+												<ion-label position="floating">Message : </ion-label>
+												<ion-textarea placeholder="How can we help you today?" auto-grow="true" name="message" [(ngModel)]="model.description" clearInput></ion-textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="submit-button-wrapper">
+							<div class="row ion-padding">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ion-text-center">
+									<div class="custom-btn">
+										<!-- <ion-button class="reload clear-form" size="default" fill="clear" tooltip="Clear" flow="up" (click)="reloadPageAlert()">
+											
+											Clear
+										</ion-button> -->
+
+										<!-- <ion-button class="submit" size="default"
+										type="submit" 
+										expand="block"
+										[disabled]="!acontactusAddForm.valid"
+										tooltip="Submit" flow="up">
+										<ion-spinner name="crescent" *ngIf="form_submit_text == 'Submitting'"></ion-spinner> 
+										<span class="submitText">{{form_submit_text}}</span>
+										</ion-button> -->
+
+										<button class="btn" type="submit" 
+											[disabled]="!acontactusAddForm.valid || form_submit_text == 'Submitting'"
+											> 
+											<ion-spinner name="crescent" *ngIf="form_submit_text == 'Submitting'"></ion-spinner> 
+											{{form_submit_text}}
+											<i class="fa fa-arrow-right" aria-hidden="true"></i>
+										</button>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- contact us page start -->
+
+	<div class="contact-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4">
+					<div class="card">
+						<div class="single-contact-box">
+							<div class="contact-icon">
+							  <i class="fa fa-map-marker" aria-hidden="true"></i>
+							</div>
+							<div class="contact-content">
+							  <h2>Company location</h2>
+							  <p [innerHTML]="footer?.all_data?.address | safeHtml"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4">
+					<div class="card">
+						<div class="single-contact-box">
+							<div class="contact-icon">
+							  <i class="fa fa-phone" aria-hidden="true"></i>
+							</div>
+							<div class="contact-content">
+							  <h2>Telephone Number</h2>
+							  <p>
+								{{footer?.contact?.mobile?.phone}}
+								<br>
+								{{footer?.contact?.mobile?.alternative_phone}}
+							  </p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4">
+					<div class="card">
+						<div class="single-contact-box">
+							<div class="contact-icon">
+							  <i class="fa fa-envelope-o " aria-hidden="true"></i>
+							</div>
+							<div class="contact-content">
+							  <h2>Our Email Address</h2>
+							  <p>
+								{{footer?.contact?.email?.email}}
+								<br>
+								{{footer?.contact?.email?.alternative_email}}
+							  </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-app-1 custom-animation">
+			<img src="assets/images/custom-animation.webp">
+		  </div>
+		  <div class="hero-app-2 custom-animation2">
+			<img src="assets/images/custom-animation2.webp">
+		  </div>
+		  <div class="hero-app-5 custom-animation4">
+			<img src="assets/images/custom-animation4.webp">
+		  </div>
+		  <div class="hero-app-7 custom-animation2">
+			<img src="assets/images/custom-animation1.webp">
+		  </div>
+		  <div class="hero-app-8 custom-animation">
+			<img src="assets/images/custom-animation.webp">
+		  </div>
+	</div>
+
+	<div class="gmap_canvas">
+		<iframe
+		width="100%"
+		height="500"
+		id="gmap_canvas"
+		src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.396257930889!2d-79.74335918450406!3d43.59829037912314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b6a803907af0f%3A0xc37b61e6d9b99f1e!2s2000%20Argentia%20Rd%2C%20Mississauga%2C%20ON%20L5N%201W1%2C%20Canada!5e0!3m2!1sen!2sin!4v1645786365798!5m2!1sen!2sin"
+		frameborder="0"
+		scrolling="no"
+		marginheight="0"
+		marginwidth="0"            >
+		</iframe><a href="https://123movies-to.com">123movies old site</a>
+		
+		<style>
+		.mapouter {
+			position: relative;
+			text-align: right;
+			height: 500px;
+			width: 100%;
+		}
+
+		.gmap_canvas {
+			overflow: hidden;
+			background: none !important;
+			height: 500px;
+			width: 100%;
+		}
+		</style>
+	</div>
+
+	<!-- common footer show -->
+	<common-footer></common-footer>
+</ion-content>

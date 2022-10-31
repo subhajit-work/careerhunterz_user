@@ -1,0 +1,59 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScrollHedearFix($event)">
+  <!-- common header show -->
+  <common-header [ngClass]="{'fix-header':isFixedHeader}"></common-header>
+  <!-- Sub header start -->
+	<div class="sub-header">
+		<div class="sub-header-inner">
+		  <h1>{{parms_action_name}} Details</h1>
+		  <div class="breadcrumbs"><a class="breadcrumbs_item" href="#">Home</a><span class="breadcrumbs_delimiter">|</span><span class="breadcrumbs_item current">{{parms_action_name}} Details</span></div>
+		</div>
+	</div>
+	<!-- Sub header end -->
+  <!--------- details section start ------- -->
+  <div class="detailsPage-wrapper details-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="details-item">
+            <div class="details-image">
+              <img src="{{file_url}}/{{viewData?.Path}}/{{viewData?.image}}">
+            </div>
+            <div class="details-content">
+              <div class="blog-details-meta">
+								<a href="javascript:void(0)"><i class="far fa-calendar-alt"></i> <span>{{viewData?.created_at | date:'dd MMM yyy'}}</span></a>
+								<span><i class="fas fa-user"></i> <a href="javascript:void(0)">Admin</a></span>
+							</div>
+              <h2 *ngIf="parms_action_name == 'blog'">{{viewData?.blog_title}}</h2>
+              <h2 *ngIf="parms_action_name == 'event'">{{viewData?.event_title}}</h2>
+              <p>{{viewData?.short_desc}}</p><br>
+              <p [innerHTML]="viewData?.description | safeHtml"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="details-recent">
+            <div class="details-recent-header">
+              <h3>More Posted</h3>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="details-recent-items">
+              <div class="details-recent-item" *ngFor="let item of recentData; let i = index;">
+                <div class="post">
+                  <figure class="post-thumb"><a href="#/details/{{parms_action_name}}/{{item?.url_slug}}"><img src="{{file_url}}/{{item?.Path}}/{{item?.image}}" alt=""></a></figure>
+                  <span class="post-date">{{item?.created_at | date:'dd MMM yyy'}}</span>
+                  <h5 *ngIf="parms_action_name == 'blog'"><a href="#/details/{{parms_action_name}}/{{item?.url_slug}}">{{item?.blog_title}}</a></h5>
+                  <h5 *ngIf="parms_action_name == 'event'"><a href="#/details/{{parms_action_name}}/{{item?.url_slug}}">{{item?.event_title}}</a></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- details section end -->
+
+  <!-- common footer show -->
+  <common-footer></common-footer>
+
+</ion-content>

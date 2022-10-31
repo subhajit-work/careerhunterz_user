@@ -1,0 +1,134 @@
+<ion-footer class="main-footer">
+  <div class="footer-bg"></div>
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <p class="footer-tittle">Office</p>
+          <!-- <p class="footer-text">
+            It is a long established fact that a reader will distracted by the readable ...
+          </p> -->
+          <p [innerHTML]="footer?.all_data?.address | safeHtml"></p>
+          <ul class="social-links">
+            <li>
+              <h5>Connected:</h5>
+            </li>
+            <li *ngIf="footer?.social?.facebook">
+              <a target="blank" href="{{footer?.social?.facebook}}">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li *ngIf="footer?.social?.twitter">
+              <a target="blank" href="{{footer?.social?.twitter}}">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li *ngIf="footer?.social?.instagram">
+              <a target="blank" href="{{footer?.social?.instagram}}">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li *ngIf="footer?.social?.Linkedin">
+              <a target="blank" href="{{footer?.social?.Linkedin}}">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li *ngIf="footer?.social?.youtube">
+              <a target="blank" href="{{footer?.social?.youtube}}">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <p class="footer-tittle">Useful Links</p>
+          <ul class="link-lists">
+            <li>
+              <a href="#/about-us">About Us</a>
+            </li>
+            <li>
+              <a href="#/resources">Resources</a>
+            </li>
+            <li>
+              <a href="#/service">Core Services</a>
+            </li>
+            <li>
+              <a href="#/our-process">Our Process</a>
+            </li>
+            <li>
+              <a href="#/contact">Query</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <p class="footer-tittle">Latest Blogs</p>
+          <ul class="link-lists">
+            <li *ngFor="let item of blogData?.data; let i = index;">
+              <a href="#/details/blog/{{item?.url_slug}}">{{item?.blog_title}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <p class="footer-tittle">Latest Events</p>
+          <ul class="link-lists">
+            <li *ngFor="let item of eventDate?.data; let i = index;">
+              <a href="#/details/event/{{item?.url_slug}}">{{item?.event_title}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <ul>
+        <li>
+          <p>© 2022 Career Hunterz All Rights Reserved</p>
+        </li>
+        <li>
+          <span class="power_by_text" style="padding-right: 5px;">Developed By:</span>
+          <a class="powerby" href="https://www.nitsolution.in/" target="_blank">
+            NIT Solution Pvt. Ltd.
+          </a>
+        </li>
+        <li>
+          <span class="power_by_text" style="padding-right: 5px;">Collaborate with:</span>
+          <a class="powerby" href="https://i-texperts.com/" target="_blank">
+            I Tech Experts Services Inc.
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ion-footer>
+<div class="chatWidget">
+  <ion-fab *ngIf="!chatWidget" horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button class="main-icon">
+      <ion-icon name="chatboxes"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="sendMail()" color="danger">
+        <ion-icon name="mail"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="openChatBox()" color="success">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div *ngIf="chatWidget" class="chatbox">
+    <div class="chatbox-wrapper">
+      <div class="chat">
+        <ion-icon class="closeMsg" (click)="openChatBox()" name="close-circle"></ion-icon>
+        <div class="messages">
+          <div class="messages-item">
+            <p>How can I help you? :)</p>
+          </div>
+        </div>
+        <div class="message-box">
+          <input class="message-input" type="text" placeholder="Type message..." name="wpMsg" [(ngModel)]="model.wpMsg">
+          <ion-button (click)="sendWhatsapp(model.wpMsg)" color="success" shape="round">
+            <ion-icon slot="icon-only" name="send"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

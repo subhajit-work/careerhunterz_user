@@ -1,0 +1,51 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScrollHedearFix($event)">
+  <!-- common header show -->
+  <common-header [ngClass]="{'fix-header':isFixedHeader}"></common-header>
+  <!-- Sub header start -->
+	<div class="sub-header">
+		<div class="sub-header-inner">
+		  <h1>Our Process</h1>
+		  <div class="breadcrumbs"><a class="breadcrumbs_item" href="#">Home</a><span class="breadcrumbs_delimiter">|</span><span class="breadcrumbs_item current">Our Process</span></div>
+		</div>
+	</div>
+	<!-- Sub header end -->
+  <!--------- details section start ------- -->
+  <div class="detailsPage-wrapper our-process">
+    <div class="container">
+      <div class="section-tittle-box">
+        <div class="section-tittle">
+          <h5>{{viewData?.title?.title}}</h5>
+        </div>
+        <div class="section-main-title" [innerHTML]="viewData?.title?.sub_title | safeHtml"></div>
+        <p>
+          Rapidiously reconceptualize effective ours innovation without us Distinctively enable value-added strategic theme areas that communities. Quickly conceptualize. 
+        </p>
+      </div>
+    </div>
+    <div class="process-bottom">
+      <div class="container">
+        <ul class="timeline">
+          <!-- Item 1 -->
+          <li *ngFor="let item of viewData?.data; let i = index; let lastInd = last; let oddItem=odd; let evenItem=even;">
+            <div [ngClass]="{'direction-l': evenItem, 'direction-r': oddItem}">
+              <div class="flag-wrapper">
+                <span class="hexa"></span>
+                <span class="flag">{{item?.title}}</span>
+                <span class="time-wrapper"><span class="time">Step {{i + 1}}</span></span>
+              </div>
+              <div class="img-part">
+                <img src="{{file_url}}/{{item?.Path}}/{{item?.image}}">
+              </div>
+              <div class="desc" [innerHTML]="item?.short_desc | safeHtml"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- details section end -->
+
+  <!-- common footer show -->
+  <common-footer></common-footer>
+
+</ion-content>

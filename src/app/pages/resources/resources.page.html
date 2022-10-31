@@ -1,0 +1,106 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScrollHedearFix($event)">
+	<!-- common header show -->
+	<common-header [ngClass]="{'fix-header':isFixedHeader}"></common-header>
+
+	<!-- Sub header start -->
+	<div class="sub-header">
+		<div class="sub-header-inner">
+		  <h1>Resources</h1>
+		  <div class="breadcrumbs"><a class="breadcrumbs_item" href="#">Home</a><span class="breadcrumbs_delimiter">|</span><span class="breadcrumbs_item current">Resources</span></div>
+		</div>
+	</div>
+	<!-- Sub header end -->
+
+  <!-- blog section start -->
+  <div class="blog-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-tittle">
+            <h5>{{blogData?.title?.title}}</h5>
+          </div>
+          <div class="section-main-title">
+            <h1 [innerHTML]="blogData?.title?.sub_title | safeHtml"></h1>
+          </div>
+          <div class="blog-slider">
+            <ngx-slick-carousel class="carousel" 
+            #slickModal="slick-carousel" 
+            [config]="blogList" 
+            (init)="slickInit($event)"
+            >
+            <div ngxSlickItem class="slide" *ngFor="let item of blogData?.data; let i = index;">
+              <div class="blog-item">
+                <div class="blog-thumb">
+                  <img src="{{file_url}}/{{item?.Path}}/{{item?.image}}" alt="">
+                  <div class="blog-meta">
+                    <div class="meta-content">
+                      <h4>{{item?.created_at | date:'dd'}}</h4>
+                      <span>{{item?.created_at | date:'MMM'}}</span>
+                    </div>
+                  </div>
+                  <div class="blog-content">
+                    <div class="blog-title">
+                      <a href="#/details/blog/{{item?.url_slug}}"><h2>{{item?.blog_title}}</h2></a>
+                    </div>
+                    <div class="blog-content-text">
+                      <p [innerHTML]="item?.short_desc | safeHtml"></p>
+                    </div>
+                    <div class="blog-btn">
+                      <a href="#/details/blog/{{item?.url_slug}}">Read More <i class="fa fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- blog section end -->
+
+  <!-- Event section start -->
+  <div class="event-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-tittle">
+            <h5>{{eventDate?.title?.title}}</h5>
+          </div>
+          <div class="section-main-title">
+            <h1 [innerHTML]="eventDate?.title?.sub_title | safeHtml"></h1>
+          </div>
+          <div class="event-slider">
+            <ngx-slick-carousel class="carousel" 
+            #slickModal="slick-carousel" 
+            [config]="eventList" 
+            (init)="slickInit($event)"
+            >
+            <div ngxSlickItem class="slide" *ngFor="let item of eventDate?.data; let i = index;">
+              <div class="event-item">
+                <div class="blog-grid-thumb">
+                  <a href="#/details/event/{{item?.url_slug}}"><img src="{{file_url}}/{{item?.Path}}/{{item?.image}}" alt=""></a>
+                </div>
+                <div class="blog-grid-content">
+                  <div class="blog-grid-meta">
+                    <a href="#/details/event/{{item?.url_slug}}">{{item?.created_at | date:'dd MMM yyy'}}</a>
+                    <span>By Admin</span>
+                  </div>
+                  <div class="blog-grid-title">
+                    <a href="#/details/event/{{item?.url_slug}}"><h2>{{item?.event_title}}</h2></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Event section end -->
+
+  <!-- common footer show -->
+	<common-footer></common-footer>
+</ion-content>
